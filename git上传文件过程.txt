@@ -1,0 +1,39 @@
+前提：首先要拥有自己的GitHub账号（没有去官网创建一个）和下载Git；
+然后配置Git：
+本地创建ssh key
+ ssh-keygen -t rsa -C "your_email@youremail.com"
+
+后面的your_email@youremail.com改为你在github上注册的邮箱，之后会要求确认路径和输入密码，我们这使用默认的一路回车就行。成功的话会在~/下生成.ssh文件夹，进去，打开id_rsa.pub，复制里面的key。
+回到github上，进入 Account Settings（账户配置），左边选择SSH Keys，Add SSH Key,title随便填，粘贴在你电脑上生成的key。
+
+为了验证是否成功 在git bash中输入：ssh -T git@github.com
+如果是第一次的会提示是否continue，输入yes就会看到：You've successfully authenticated, but GitHub does not provide shell access 。这就表示已成功连上github。
+
+接下来配置个人的用户信息，配置个人的用户名和电子邮件地址：
+ git config --global user.name "linshibo1994"
+ git config --global user.email ”841466403@qq.com”
+如果用了 --global 选项，那么更改的配置文件就是位于你用户主目录下的那个，以后你所有的项目都会默认使用这里配置的用户信息。
+如果要在某个特定的项目中使用其他名字或者电邮，只要去掉 --global 选项重新配置即可，新的设定保存在当前项目的 .git/config 文件里
+
+查看配置的信息：
+git config --list
+
+最后，基本的git操作可以在网上去找来学习；
+
+以下是将自己的代码或者文件上传到GitHub上的过程：
+1.先找到自己想要分享或者上传文件或者代码的文件夹，右键选择Git bash ，或者在Git bash中进入这个文件夹。建立一个仓库：git init
+2.选择想要添加进仓库的文件：git add.
+一般情况下，如果想分享(上传)文件夹里所有的文件或者代码，就写git add.(就是在add后面加“.”)，如果想上传指定的文件，只需把“.”改为文件名就可以了。这个步骤只是选择了要加入仓库的文件，下个步骤才是添加进入仓库；
+3.git commit -m'提交的说明'（即自己提交代码需要些的说明或解释）
+git commit 只是提交到本地仓库，远程仓库并无影响 ；-m后面跟一个参数表示说明，将代码提交到GitHub后会在代码文件信息上显示这个说明
+4.添加远程地址：git remote add origin git@github.com:yourName/yourRepo.git
+后面的yourName和yourRepo表示你再github的用户名和刚才新建的仓库，加完之后进入.git，打开config，这里会多出一个remote "origin"内容，这就是刚才添加的远程地址，也可以直接修改config来配置远程地址。
+5.上传到GitHub：git push -u origin master
+如果输入 git push origin master
+提示出错信息：error:failed to push som refs to …….
+解决办法如下：
+1、先输入 git pull origin master //先把远程服务器github上面的文件拉下来
+2、再输入 git push origin master
+3、如果出现报错 fatal: Couldn’t find remote ref master或者fatal: ‘origin’ does not appear to be a git repository以及fatal: Could not read from remote repository.
+
+4、则需要重新输入 git@github.com:yourName/yourRepo.git
