@@ -1,0 +1,169 @@
+ npm install  -g hexo   安装hexo
+
+npm install hexo-deployer-git --save
+
+http://www.cnblogs.com/Rising/p/3741116.html
+
+
+git config --global user.email "841466403@qq.com"
+git config --global user.name "linshibo1994"
+
+1.安装Git    cat ~/.ssh/id_rsa.pub 查看 key
+本地Git仓库和GitHub仓库之间的传输是通过SSH加密的 所以需要配置 ssh key
+
+配置ssh钥匙
+ssh-keygen -t rsa -C "841466403@qq.com"
+
+验证key   输入yes
+ssh -T git@github.com
+
+
+git status  查看仓库当前状态  
+
+git diff ... 查看具体修改了什么内容
+
+git checkout -- ... 撤销修改  丢弃工作区的修改
+------------------------------------------------------------------------------------------------------------
+一种是readme.txt自修改后还没有被放到暂存区，现在，撤销修改就回到和版本库一模一样的状态；
+一种是readme.txt已经添加到暂存区后，又作了修改，现在，撤销修改就回到添加到暂存区后的状态。
+
+用命令git reset HEAD file可以把暂存区的修改撤销掉（unstage），重新放回工作区
+
+场景1：当你改乱了工作区某个文件的内容，想直接丢弃工作区的修改时，用命令git checkout -- file。
+
+场景2：当你不但改乱了工作区某个文件的内容，还添加到了暂存区时，想丢弃修改，分两步，
+第一步用命令git reset HEAD file，就回到了场景1，
+第二步按场景1操作。
+
+场景3：已经提交了不合适的修改到版本库时，想要撤销本次提交，参考版本回退一节，不过前提是没有推送到远程库。
+-------------------------------------------------------------------------------------------------------------
+
+git add ....   文件加入暂存区
+把文件添加进去，实际上就是把文件修改添加到暂存区；
+
+git commit -m "..."	提交暂存区
+
+提交更改，实际上就是把暂存区的所有内容提交到当前分支。 master分支（创建git版本库 自动创建了master分支）
+------------------------------------------------------------------------------------------------------
+HEAD指向的版本就是当前版本，因此，Git允许我们在版本的历史之间穿梭，使用命令git reset --hard commit_id。
+
+穿梭前，用git log可以查看提交历史，以便确定要回退到哪个版本。
+
+要重返未来，用git reflog查看命令历史，以便确定要回到未来的哪个版本。
+-------------------------------------------------------------------------------------------------------
+
+git reset --head HEAD^  回退版本
+
+git log 查看版本历史 
+
+git rest --head ...  版本穿梭
+
+git reflog 查看历史命令 能查看commit_id 进行回退
+
+git rm ...   将仓库里的文件删除
+git commit -m "..."  需要提交删除的文件
+
+本地仓库关联 远程仓库：
+git remote add origin git@github.com:linshibo1994/gitstudy.git
+
+git push -u origin master  
+把本地库的内容推送到远程  git push命令 实际上是把当前分支master推送到远程
+我们第一次推送master分支时，加上了-u参数，Git不但会把本地的master分支内容推送的远程新的master分支，
+还会把本地的master分支和远程的master分支关联起来，在以后的推送或者拉取时就可以简化命令
+
+--------------------------------------------------------------------------------------------
+要关联一个远程库，使用命令git remote add origin git@server-name:path/repo-name.git；
+
+关联后，使用命令git push -u origin master第一次推送master分支的所有内容；
+
+此后，每次本地提交后，只要有必要，就可以使用命令git push origin master推送最新修改；
+-------------------------------------------------------------------------------------------
+
+克隆仓库：git clone ...
+git clone git@github.com:linshibo1994/gitstudy1.git
+--------------------------------------------------------------------
+要克隆一个仓库，首先必须知道仓库的地址，然后使用git clone命令克隆。 |
+
+Git支持多种协议，包括https，但通过ssh支持的原生git协议速度最快。    |
+---------------------------------------------------------------------
+
+
+Git鼓励大量使用分支：
+-----------------------------------------
+查看分支：git branch
+
+创建分支：git branch <name>
+
+切换分支：git checkout <name>
+
+创建+切换分支：git checkout -b <name>
+
+合并某分支到当前分支：git merge <name>
+
+删除分支：git branch -d <name>
+-----------------------------------------
+
+常用的git命令：
+
+git branch 查看本地所有分支
+git status 查看当前状态 
+git commit 提交 
+git branch -a 查看所有的分支
+git branch -r 查看本地所有分支
+git commit -am "init" 提交并且加注释 
+git remote add origin git@192.168.1.119:ndshow
+git push origin master 将文件给推到服务器上 
+git remote show origin 显示远程库origin里的资源 
+git push origin master:develop
+git push origin master:hb-dev 将本地库与服务器上的库进行关联 
+git checkout --track origin/dev 切换到远程dev分支
+git branch -D master develop 删除本地库develop
+git checkout -b dev 建立一个新的本地分支dev
+git merge origin/dev 将分支dev与当前分支进行合并
+git checkout dev 切换到本地dev分支
+git remote show 查看远程库
+git add .
+git rm 文件名(包括路径) 从git中删除指定文件
+git clone git://github.com/schacon/grit.git 从服务器上将代码给拉下来
+git config --list 看所有用户
+git ls-files 看已经被提交的
+git rm [file name] 删除一个文件
+git commit -a 提交当前repos的所有的改变
+git add [file name] 添加一个文件到git index
+git commit -v 当你用－v参数的时候可以看commit的差异
+git commit -m "This is the message describing the commit" 添加commit信息
+git commit -a -a是代表add，把所有的change加到git index里然后再commit
+git commit -a -v 一般提交命令
+git log 看你commit的日志
+git diff 查看尚未暂存的更新
+git rm a.a 移除文件(从暂存区和工作区中删除)
+git rm --cached a.a 移除文件(只从暂存区中删除)
+git commit -m "remove" 移除文件(从Git中删除)
+git rm -f a.a 强行移除修改后文件(从暂存区和工作区中删除)
+git diff --cached 或 $ git diff --staged 查看尚未提交的更新
+git stash push 将文件给push到一个临时空间中
+git stash pop 将文件从临时空间pop下来
+---------------------------------------------------------
+git remote add origin git@github.com:username/Hello-World.git
+git push origin master 将本地项目给提交到服务器中
+-----------------------------------------------------------
+git pull 本地与服务器端同步
+-----------------------------------------------------------------
+git push (远程仓库名) (分支名) 将本地分支推送到服务器上去。
+git push origin serverfix:awesomebranch
+------------------------------------------------------------------
+git fetch 相当于是从远程获取最新版本到本地，不会自动merge
+git commit -a -m "log_message" (-a是提交所有改动，-m是加入log信息) 本地修改同步至服务器端 ：
+git branch branch_0.1 master 从主分支master创建branch_0.1分支
+git branch -m branch_0.1 branch_1.0 将branch_0.1重命名为branch_1.0
+git checkout branch_1.0/master 切换到branch_1.0/master分支
+du -hs
+-----------------------------------------------------------
+mkdir WebApp
+cd WebApp
+git init
+touch README
+git add README
+git commit -m 'first commit'
+git remote add origin git@github.com:daixu/WebApp.git
+git push -u origin master
