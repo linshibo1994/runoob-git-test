@@ -1,0 +1,32 @@
+<html>
+<head>
+<title>测试冒泡事件</title>
+
+</head>
+<body>
+	
+	<div>
+		<input type="button" value="测试冒泡事件">
+	</div>
+
+<script type="text/javascript">
+	var $input=document.getElementsByTagName("input")[0];
+	var $div=document.getElementsByTagName("div")[0];
+	var $body=document.getElementsByTagName("body")[0];
+    
+    $input.onclick = function (e) {
+    	 this.style.border = "5px solid red"
+         var e = e || window.e;
+         alert("red")	
+    }
+    $div.onclick = function(e){
+    	this.style.border = "5px solid yellow"
+    	alert("yellow")
+    }
+    $body.onclick = function(e){
+    	this.style.border = "5px solid green"
+    	alert("green")
+    }
+</script>
+</body>
+</html>
