@@ -1,0 +1,174 @@
+  
+  body{
+    margin:auto;
+    width: 1285px;
+    
+  }
+  ul>li{
+    display: inline-block;
+    margin-left: 20px;
+    cursor: pointer;
+  }
+  li:hover{
+    border-bottom: 3px solid red;
+    padding-bottom: 22px;
+    color: red;
+  }
+  .box{
+    width: 1285px;
+    height: 900px;
+    margin-left:0px auto;
+    margin-right: 0px auto;
+
+  }
+  
+ .box1{
+       
+       float:left;
+       width:679px;
+       height:60px;
+    }
+ .box2{float:left;
+       border :0px;       
+      width:602px;
+      height:57px;
+}
+.box3{
+     float:left;
+      border :0px;
+    width: 1280px;
+    height: 427px;
+   
+}
+.box4{
+    float: left;
+     border :0px;
+    width: 126px;
+    height: 65px;
+    
+}
+.box5{
+ 
+  float: left;
+  width: 331px;
+  height: 65px;
+}
+.box6{
+
+  float: left;
+  width: 823px;
+  height:65px;
+}
+.box7{
+  float: left;
+  width:1280px;
+  height:197px;
+}
+.box8{
+  float: left;
+  width:323px;
+  height:250px;
+}
+.box9{
+  float:left;
+   width:336px;
+  height:250px;
+}
+.box10{
+  float:left;
+   width:318px;
+  height:250px;
+}
+.box11{
+  float:left;
+   width:306px;
+  height:250px;
+}
+.box12{
+   float:left;
+   width:1280px;
+  height:701px;
+  background-image: url("images/2.gif");}
+
+  select{
+    border: solid 2px color:white;
+    appearance:none;
+    -moz-appearance:none;
+    -webkit-appearance:none;
+    background: url("images/3.gif") no-repeat scroll right center transparent;
+    padding-right: 12px;
+  }
+  select::-ms-expand{
+    display: none ;
+  }
+
+
+.box15{
+    float:left;
+   width:1280px;
+  height:604px;
+}
+.box16{
+    float:left;
+   width:849px;
+  height:566px;
+}
+.box17{
+   float:left;
+   padding-left: 70px;
+   padding-top:137px;
+   padding-right:70px;
+   padding-bottom: 128px;
+   width:291px;
+   height:302px;
+}
+.box18{
+  float:left; 
+   width:1280px;
+   height: 521px;
+}
+.box19{
+  float:left;
+  width:1280px;
+  height:305px;
+}
+.box20{
+  float:left;
+  width:502px;
+  height:444px;
+}
+.box21{
+  float:left;
+ 
+  width:778px;
+  height:444px;
+}
+.box22{
+  float:left;
+  width:1280px;
+  height:416px;
+}
+.box23{
+  float:left;
+  width:1280px;
+  height:181px;
+}
+.box24{
+  float:left;
+  width:1280px;
+  height:105px;
+
+}
+.box25{
+  position: relative;
+  float:left;
+  width:1280px;
+  height:130px;
+ 
+  background: url("images/bottom.gif");
+} 
+
+#a{
+   position: absolute;
+    left: 300px
+}
