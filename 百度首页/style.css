@@ -1,0 +1,117 @@
+*{
+	margin: 0px;
+	padding:0px;
+}
+
+.wapper{
+	width: 100%;
+	height: 100%;
+
+}
+
+.label{
+	font-family:"Palatino Linotype", "Book Antiqua", Palatino, serif;
+	font-size: 30px;
+	width:550px;
+	height: 40px;
+	position: absolute;
+	right: 0px;
+}
+a{
+	font:Verdana, Geneva, sans-serif;
+	font-size:12px;
+	margin-top:2px;
+	margin-bottom:2px;
+	margin-right:7px;
+	display: inline;
+	text-decoration:underline;<!--在字体下面加下划线-->
+}
+#logo{
+	height:129px;
+	width:270px;
+	margin :auto;
+
+}
+.button{
+	border:2px solid red;
+	margin:  auto;
+	margin-left: 30%;
+}
+.footleft{
+	margin:  auto;
+	color: #a9a9a9;
+	width: 268px;
+	height: 70px;
+	float: left;
+	margin-right: 30px;
+/*    border:2px solid  blue;*/
+}
+.footleft p{
+	font-family:arial;
+	font-size:13px;
+}
+.footright{
+	margin:  auto;
+	font-family:arial;
+	font-size:12px;
+	margin :auto;
+	float: left;
+	color: #a9a9a9;
+	width: 400px;
+	height: 80px;
+
+/*	border:2px solid  red;*/
+
+	/*border-color:
+	display:inline-block;
+	text-align:left;
+	margin-left:33px;
+	line-height:22px;
+	position:relative;
+	top:-2px;
+	float:right;
+	*margin-left:0;
+	*position:static*/
+
+}
+.footright a{
+	width: 300px;
+	height: 80px;
+	color: #a9a9a9;
+	margin-right: 10px;
+}
+.label a:link,.label a:visited{
+	font-weight: bold;
+	color: black;
+	text-align: center;
+	padding: 6px;
+
+}
+.label a:hover,.label a:active{
+	color: blue;
+
+}
+
+
+
+
+/*wode */
+.mg{
+	margin-left: 5px;
+	width: 70px;
+	height: 70px;
+	border: 0;
+}
+.spa{
+	font-family:arial;
+	font-size:12px;
+	font-color:lightgray;
+	width: 50px;
+	display: block;
+	float: right;
+	padding-top: 20px;
+}
+.fb{
+	float: left;
+	width: 130px;
+}
