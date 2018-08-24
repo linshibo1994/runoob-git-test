@@ -1,0 +1,159 @@
+第05讲 Struts2配置
+【】Struts2配置的内容
+1.include配置
+2.
+3.
+4.
+5.
+
+【】Struts2配置文件
+1.struts.xml
+核心配置文件，可以配置所有的项目。
+2.web.xml
+配置核心过滤器和Struts2常量。
+3.struts.properties
+配置Struts2常量。
+4.struts-default.xml
+配置Struts2内置的项目，Struts2框架自带。
+5.default.properties
+Struts2框架自带的，配置的常用的常量。
+6.struts-plugin.xml
+其他插件中的配置文件。
+
+【】include配置
+1.功能:引入其他的配置文件。
+           将Struts配置内容划分为不同的模块。
+2.语法：
+在struts.xml中使用<include file>
+<struts>
+    
+    <include file="struts-department.xml"></include>
+    <include file="struts-employee.xml"></include>
+</struts>
+
+【】常量配置
+1.常量的意义：
+对Struts2框架进行全局定制。
+2.常见的常量(属性)
+(1) struts.i18n.encoding=UTF-8
+设定字符编码集
+(2)struts.multipart.parser=jakarta
+设定使用上传框架, cos, pell, jakarta
+(3)struts.multipart.saveDir=d:/temp
+设定上传文件的存储位置
+(4)struts.multipart.maxSize=2097152
+设定上传文件的最大字节数
+(5)struts.action.extension=action,do,
+设定action请求的后缀。
+3.设定常量配置（支持3种方式）
+(1) struts的xml配置文件
+推荐在核心配置文件struts.xml中设定。
+<constant name="属性名" value="值" />
+案例：
+<struts>
+<constant name="struts.action.extension" value="do" ></constant>
+<constant name="struts.multipart.saveDir" value="d:/temp" />
+
+</struts>
+(2)在struts.properties属性文件中配置
+配置语法：
+属性名=值
+案例：
+struts.action.extension=mvc
+
+(3)在/WEB-INF/web.xml配置常量(属性)
+语法: 属性常量作为Struts2的核心Filter参数。
+<filter>
+   <init-param>
+      	<param-name>struts.action.extension</param-name>
+      	<param-value>mmm</param-value>
+      </init-param>
+</filter>
+案例：
+<filter>
+      <filter-name>action2</filter-name>
+      <filter-class>or.apache.struts2.dispatcher.filter.StrutsPrepareAndExecuteFilter</filter-class>
+      <init-param>
+      	<param-name>struts.action.extension</param-name>
+      	<param-value>mmm</param-value>
+      </init-param>
+      <init-param>
+         <param-name>struts.multipart.saveDir</param-name>
+         <param-value>c:/temp</param-value>
+      </init-param>
+      
+  </filter>
+
+常量配置的优先级：
+web.xml  ---- struts.xml  ----- struts.properties
+--- default.properties
+
+【】package配置
+1.功能：将常用的action，result,interceptor 
+进行分类配置，同时指定action的请求目录。
+2.语法：
+<package name="名" namespace="/目录"
+  extends="父包" >
+
+</package>
+
+【】action配置
+1.功能：配置Action的类，请求地址，
+请求方法。
+2.语法：
+<package  .....>
+   <action name="请求地址" 
+   class="包名.类名"
+   method="方法名">
+      子元素（结果，拦截器，异常声明）
+   </action>
+</package>
+3.省略class, 默认是：ActionSupport
+   省略method, 默认是：execute
+
+【】结果配置
+1.功能：
+指定Action处理后的结果类型，
+包括：转发到JSP，重定向，文件下载，
+           JSON， XML。
+2.类型：
+(1)局部结果：配置在action的子元素中。
+<action.....>
+   <result name="结果名" type="类型">
+     结果声明(/main.jsp)
+   </result>
+</action>
+如果省略name，默认是：success
+省略type, 默认是：Dispatcher
+
+(2)全局结果：定义在<packaage>下。
+语法：
+<package ......>
+   <global-results>
+       <result name="结果名" type="类型">
+           结果声明(/main.jsp)
+      </result>
+   </global-results>
+
+</package>
+【】异常配置
+1.捕获Action中的异常，跳转到指定的JSP。
+2.异常配置的类型：
+(1)局部的异常
+ 在<action>内配置，专门捕获此Action的异常。
+<action .....>
+   <exception-mapping result="结果名" 
+      exception="异常类型" />
+
+</action>  
+
+(2)全局的异常
+
+<package ....>
+    <global-exception-mapping >
+      <exception-mapping result="结果名"   exception="异常类型" />
+    </global-exception-mapping >
+</package>
+
+
+【】拦截器配置

@@ -1,0 +1,75 @@
+第06讲 文件上传与下载处理编程
+【】Struts2文件上传的处理机制
+1.文件上传处理的拦截器FileUpload
+2.与文件上传相关的属性常量
+(1)struts.mulitpart.parser=jakarta
+指定使用哪个文件上传解析器。
+(2)struts.mulitpart.saveDir=/home/file/upload
+指定上传文件的临时保存位置。
+(3)struts.mulitpart.maxSize=字节数
+限定上传文件的最大字节。
+
+【】文件上传的表单及表单元素
+1.文件上传的表单定义
+<form action="xxx"  method="post" 
+           enctype="multipart/form-data">
+
+</form>
+2.文件的标记
+<input type="file" name="photo" />
+
+【】Struts2 Action接收文件上传处理
+Struts2接收上传文件的定义：
+1.文件：
+private File photo=null;
+2文件名：
+private String photoFileName=null;
+3.文件类型：
+private String photoContentType=null;
+
+
+
+
+
+【】上传文件保存到数据库编程处理
+1.数据库保存文件：
+(1) MySQL： blob(4k)，   longblob(2G)
+(2) SQL Server: image (2G)
+(3) Oracle: Blob(4G,8G,.....)
+
+2.Model属性类型：
+private Blob photo=null;
+(做映射时使用java.sql.Blob类型)
+
+
+3. 将File的图片文件转换为Blob属性。
+
+InputStream iphoto=new FileInputStream(photo);
+
+Blob bphoto=session.getLobHelper().createBlob(iphoto, iphoto.available());
+	
+em.setPhoto(bphoto);
+em.setFileName(fileName);
+em.setContentType(contentType);
+
+session.save(em);
+【】Struts2文件下载机制
+1.Struts2提供了一个用于文件下载的结果
+stream
+【】Struts2 Action文件下载编程
+Action处理文件下载：
+1.提供了返回InputStream的方法：
+ public InputStream getXxx() {
+
+    return inputstream;
+ }
+2.提供一个文件名的属性
+   private String fileName=null;
+3.提供一个文件类型的属性；
+   private String contenType=null;
+4.提供一个普通控制方法：
+
+
+【】Struts2文件下载结果类型stream配置
+
+

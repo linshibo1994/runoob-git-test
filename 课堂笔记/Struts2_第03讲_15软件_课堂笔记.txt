@@ -1,0 +1,118 @@
+第03讲 Result
+【】Result功能
+Result确定Action结束后的跳转方式
+和跳转目标。
+
+【】Result类型
+1.按位置分：
+(1)局部结果(Local Result)
+配置在Action中。
+<action name="tomain" class="com.city.oa.controller.EmployeeController" method="tomain">
+      <result name="tomain">/employee/main.jsp</result>
+      <result name="failare">/employee/main.jsp</result>
+</action>
+
+(2)全局结果（Global Result）
+不在Action内，配置在<package>下。
+<package  .......>
+    <global-results>
+        <result name="login">/login.jsp </result>
+    </global-results>
+
+</package>
+此Package下的所有Action均可访问
+全局Result。
+
+
+2.按功能分（Struts2框架内置的结果类型）：
+(1) dispatcher(默认)：
+转发到JSP，HTML页面。
+(2) redirect
+重定向到URL，URI。
+(3) redirectAction
+重定向到Action。
+(4)chain
+转发到另一个Action。
+(5)stream
+Action执行返回流数据，通常用于文件下载。
+(6)plainText
+返回纯文本数据
+(7)freemarker
+返回freemarker框架的结果。
+(8)httpheader
+只返回响应头内容。
+(9)velocity
+返回velocity框架的结果。
+(10)xslt
+返回XML解析结果。
+【】练习题
+填空：
+Struts2能执行重定向的结果类型是
+（redirect），（redirectAction）。
+Struts2能执行转发的结果类型是
+（dispatcher），（chain）。
+【】Result配置
+<result name="名" type="类型">
+     <param name="参数名">参数值</param>
+</result>
+
+1.dispatcher
+(1)标准的配置：
+<result name="名" type="dispatcher">
+     <param name="location">/uri</param>
+     <param name="parse">true|false</param>
+</result>
+location指定JSP地址，要使用Web的
+绝对地址： /employee/main.jsp
+parse:指定是否对result值的OGNL表达式进行
+解析。
+<result name="tomain" type="dispatcher">
+     <param name="location">/employee/${address}.jsp</param>
+     <param name="parse">false</param>
+</result>
+(2)简化的配置
+省略location参数
+<result name="tomain" type="dispatcher">
+  /employee/tomain.jsp
+</result>
+省略type
+<result name="tomain">
+  /employee/tomain.jsp
+</result>
+省略name
+<result name="tomain">
+  /employee/tomain.jsp
+</result>
+
+2.redirect
+(1)标准的配置语法
+<result name="名" type="redirect">
+     <param name="location">/uri</param>
+     <param name="parse">true|false</param>
+</result>
+(2)简化配置语法：
+<result name="名" type="redirect">
+     /uri(url)
+</result>
+案例：
+<global-results>
+        <result name="success" type="redirect">/employee/tomain.action</result>
+</global-results>
+
+3.redirectAction
+(1)标准配置：
+<result name="名" type="redirectAction">
+     <param name="actionName">add</param>
+     <param name="namespace">/employee</param>
+</result>
+
+(2)简化配置
+
+
+4.chain
+
+5.plainText
+
+
+
+【】Result应用

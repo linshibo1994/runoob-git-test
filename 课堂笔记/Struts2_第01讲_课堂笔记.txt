@@ -1,0 +1,152 @@
+第01讲 Struts2概述
+【】Struts2概念
+Struts2是基于JavaEE的VC层框架。
+【】Struts2功能
+1.View层：
+(1)收集用户的输入数据：Form
+(2)显示业务数据：列表方式，详细方式
+
+2.Controller层（*）
+(1)取得View提交的数据。
+(2)验证数据合法性。
+(3)类型转换。
+(4)组装Model对象。
+(5)调用业务服务层对象的业务处理方法。
+(6) 保存给View的数据。
+(7) 跳转到指定的View对象（转发，重定向）。
+
+【】Struts2组成（*）
+1.核心控制器（过滤器）
+接收所有的请求，解析请求，进行分配。
+2. 业务控制器(Action) -开发者编程。
+完成具体的控制器职责。
+3.拦截器（Interceptor）
+
+4.集中存储机制(ActionContext)
+存储struts2的处理的信息。
+(1)action对象
+(2)请求数据
+(3)Session数据
+(4) Application数据。
+
+5.结果对象(Result)
+负责Action到View的跳转。
+
+6.OGNL语言解析器
+解析OGNL语言，访问中心存储的数据。
+
+7.配置文件：
+(1)XML方式
+(2)properties文件方式
+(3)编程方式。
+
+【】Struts2应用的开发过程
+1.引入Struts2的Jar类库文件。
+struts-min-lib
+
+2.配置核心控制器
+(1) web.xml
+(2)配置语法：
+<filter>
+      <filter-name>action2</filter-name>
+      <filter-class>org.apache.struts2.dispatcher.filter.StrutsPrepareAndExecuteFilter</filter-class>
+  </filter>
+  <!-- END SNIPPET: filter -->
+  <filter-mapping>
+        <filter-name>action2</filter-name>
+        <url-pattern>/*</url-pattern>
+  </filter-mapping>
+
+3.创建Struts2的配置文件：
+(1)文件名:struts.xml
+(2)位置：classpath根目录 （src）
+(3)文件结构：
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC
+        "-//Apache Software Foundation//DTD Struts Configuration 2.5//EN"
+        "http://struts.apache.org/dtds/struts-2.5.dtd">
+<struts>
+    
+</struts>
+
+4.编写JSP页面
+
+5.编写Struts2的控制器Action
+(注释：Struts2的Action是普通的POJO类即可)
+POJO-Plain Old Java Object
+(1)创建Class
+(2)定义接收数据属性变量(对象类型，简单类型)
+(3)编写Action方法：
+
+public class DepartmentController {
+	
+	private DepartmentModel dm=null;
+
+	public DepartmentModel getDm() {
+		return dm;
+	}
+
+	public void setDm(DepartmentModel dm) {
+		this.dm = dm;
+	}
+	//增加部门的处理方法
+	public String add() throws Exception
+	{
+		ServiceFactory.createDepartmentService().add(dm);
+		return "success";
+		
+	}
+	
+	
+
+}
+
+6.配置Action
+(1)配置的文件：struts.xml
+(2)配置语法：
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC
+        "-//Apache Software Foundation//DTD Struts Configuration 2.5//EN"
+        "http://struts.apache.org/dtds/struts-2.5.dtd">
+<struts>
+    
+    <package name="departmentadmin" 
+       namespace="/department"
+       extends="struts-default" >
+      <action name="add" 
+      class="com.city.oa.controller.DepartmentController"
+      method="add"  >
+        <result name="success" >/department/main.jsp</result>
+      
+      </action>
+      
+      <action name="modify" 
+      class="com.city.oa.controller.DepartmentController"
+      method="modify"  >
+        <result name="success" >/department/main.jsp</result>
+      
+      </action>
+      
+      <action name="delete" 
+      class="com.city.oa.controller.DepartmentController"
+      method="delete"  >
+        <result name="success" >/department/main.jsp</result>
+      
+      </action>
+    </package>
+    
+</struts>
+
+
+
+
+
+
+
+
+
+
+
+【】Struts2工作流程
+
+

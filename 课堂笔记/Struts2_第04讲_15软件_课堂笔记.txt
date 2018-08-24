@@ -1,0 +1,96 @@
+第04讲 拦截器
+【】拦截器概念
+拦截器是对Action请求进行拦截的对象。
+【】拦截器工作机制
+AOP：拦截器采用面向切面编程机制。
+（Aspect Oriented Programming）
+切面(Aspect)：多个类中多个方法里的
+相同代码段。
+拦截器就是Action类的一个切面。
+【】复选题：
+1.如下那些对象工作在AOP模式？
+A:JSP
+B:Servlet
+C:Filter
+D:Listener
+E:Action
+F: Inteceptor
+答：CF
+【】java编程中代码重用机制
+1.工厂模式：
+2.继承：
+3.切面(Aspect)
+【】拦截器功能
+
+【】Struts2内置的拦截器类型与功能
+Struts2提供了许多Action的切面对象-拦截器
+完成取得View的数据，
+验证，类型转换，组装Model对象。
+（记住7个）
+
+【】自定义拦截器编程
+1.定义拦截器类.
+2.实现Interceptor接口
+3.重写：init, destrop, intecept方法。
+public class UserLoginCheckingInterceptor implements Interceptor {
+
+	@Override
+	public void init() {
+		System.out.println("拦截器初始化");
+
+	}
+	
+	@Override
+	public void destroy() {
+		System.out.println("拦截器销毁");
+
+	}
+
+	
+
+	@Override
+	public String intercept(ActionInvocation ai) throws Exception {
+		System.out.println("拦截器拦截。。。");
+		String result=ai.invoke();
+		return result;
+	}
+}
+
+注：
+1.拦截器拦截方法intercept直接
+返回字符串结果，将拦住，无法通过。
+2.通过调用ActionInvocation.invoke()
+   可以通过此拦截器。
+
+【】拦截器的配置
+1.声明拦截器
+<package .......>
+   <interceptors>
+      <interceptor name="" class="" />
+   </interceptors>
+
+</package>
+
+2.配置拦截的Action
+(1)局部拦截配置：只拦截指定的Action
+<action .........>
+   <result name=""></result>
+   <result name=""></result>
+   <interceptor-ref name="拦截器名" />
+</action>
+(2)全局配置拦截器：
+<package name="struts-default" abstract="true" strict-method-invocation="true">
+
+   <default-interceptor-ref name="defaultStack"/>
+
+</package>
+<!-- 员工包-->
+<package name="employee" namespace="/employee" extends="struts-default">
+
+</package>
+
+
+
+【】拦截器的访问
+【】拦截器应用案例
+
