@@ -1,0 +1,11 @@
+Spring MVC 中Bean的声明周期：
+1.instanciate：Bean的实例化；
+2.spring将值和bean的引用注入到bean对应的属性中；
+3.如果bean实现了org.springframework.beans.BeanNameAware接口，则将bean的ID传递给setBeanName(String name)方法；
+4.如果bean实现了BeanFactoryAware接口，Spring将调用setBeanFactory(BeanFactory beanFactory)方法，BeanFactory实例传入
+5.如果bean实现了ApplicationContextAware接口，spring将调用setApplicationContext(ApplicationContext applicationContext),将bean所在的应用上线文的引用传入
+6.如果bean实现了BeanPostProcessor接口，spring将调用postProcessBeforeIntialization（Object bean,StringName）;
+7.如果bean实现了IntializingBean接口，spring将会调用afterPropertiesSet（）方法，如果bean使用了init-method声明了初始化方法，该方法会被调用 init-method:<bean_init-method='xxx'/>
+8.如果bean实现了BeanPostProcessor接口，spring将会调用postProcessAfterInitialization(Object bean, String beanName)
+9.此时bean已经准备就绪，会一直驻留在应用上下文中，直到被销毁
+10.如果bean实现了DisposableBean接口，spring使用将调用它的destroy（）接口，同样如果bean使用了destory-method声明了销毁方法，该方法也会调用destroy-method：<bean_destroy-method='xxx'/>
